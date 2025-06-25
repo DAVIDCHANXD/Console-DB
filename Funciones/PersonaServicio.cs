@@ -31,6 +31,7 @@ namespace david.Funciones
                 }// se cerro la conexion a la base de datos
             };
         }
+        }
 
         public List<Persona> GetAllPersona()
         {

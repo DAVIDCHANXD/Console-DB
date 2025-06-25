@@ -13,8 +13,6 @@ Console.WriteLine("2. CREAR UNA PERSONA\n ");
 
 int OPCION= int.Parse(Console.ReadLine());
 
-
-
 switch (OPCION)
 {
     case 1:
