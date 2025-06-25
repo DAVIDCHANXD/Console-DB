@@ -10,7 +10,7 @@ using david.Funciones;
 namespace david.Migrations
 {
     [DbContext(typeof(applitationDBContext))]
-    [Migration("20250621184528_example")]
+    [Migration("20250625041645_example")]
     partial class example
     {
         /// <inheritdoc />

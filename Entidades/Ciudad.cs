@@ -11,6 +11,6 @@ namespace david.Entidades
     {
         [Key]
     public int Pkciudad { get; set; }
-        public string Nombre { get; set; }
+        public string nombre { get; set; }
     }
 }

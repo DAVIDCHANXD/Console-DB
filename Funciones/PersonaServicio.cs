@@ -31,7 +31,6 @@ namespace david.Funciones
                 }// se cerro la conexion a la base de datos
             };
         }
-        }
 
         public List<Persona> GetAllPersona()
         {
@@ -50,18 +49,48 @@ namespace david.Funciones
         public Persona ByIdPersona(int PkPersona)
         {
             Persona persona = new Persona();
-
+            using (var _context = new applitationDBContext())
+            {
+                persona = _context.Persona.FirstOrDefault(MySqlX => MySqlX.Pkpersona == PkPersona);
+            }
             return persona;
 
         }
 
-        public void UpdatePersona(Persona persona)
+        public void UpdatePersona(Persona Nuevo)
         {
+            Persona personas = new Persona();
+            using (var _context = new applitationDBContext())
+            {//se abrio la conexión a la BD
+                Nuevo = _context.Persona.Find(Nuevo.Pkpersona);
+                Nuevo.Nombre = Nuevo.Nombre;
+                Nuevo.Apellido = Nuevo.Apellido;
+                Nuevo.Correo = Nuevo.Correo;
+                Nuevo.Edad = Nuevo.Edad;
+                Nuevo.Fkciudad = Nuevo.Fkciudad;
 
+                _context.Persona.Update(Nuevo);
+                _context.SaveChanges();
+            }//se cerro la conexion
+            Console.WriteLine("Se actualizo correctamente la lista");
         }
 
         public void DeletePersona(int PkPersona)
         {
+            using (var _context = new applitationDBContext())
+            {//se abrio la conexión a la BD
+                var persona = _context.Persona.Find(PkPersona);
+                if (persona != null)
+                {
+                    _context.Persona.Remove(persona);
+                    _context.SaveChanges();
+                    Console.WriteLine("La persona ha sido eliminada exitosamente.");
+                }
+                else
+                {
+                    Console.WriteLine("No se encontró una persona con ese ID.");
+                }
+            }//se cerro la conexion
         }
     }
 }
