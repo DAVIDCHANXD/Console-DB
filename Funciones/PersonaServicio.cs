@@ -1,4 +1,5 @@
-﻿using david.Entidades;
+using david.Entidades;
+using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
@@ -60,19 +61,22 @@ namespace david.Funciones
         public void UpdatePersona(Persona Nuevo)
         {
             Persona personas = new Persona();
-            using (var _context = new applitationDBContext())
-            {//se abrio la conexión a la BD
-                Nuevo = _context.Persona.Find(Nuevo.Pkpersona);
+            {
+                Nuevo.Pkpersona = Nuevo.Pkpersona;
                 Nuevo.Nombre = Nuevo.Nombre;
                 Nuevo.Apellido = Nuevo.Apellido;
                 Nuevo.Correo = Nuevo.Correo;
                 Nuevo.Edad = Nuevo.Edad;
                 Nuevo.Fkciudad = Nuevo.Fkciudad;
 
+                using (var _context = new applitationDBContext())
+            {//se abrio la conexión a la BD
+
                 _context.Persona.Update(Nuevo);
                 _context.SaveChanges();
             }//se cerro la conexion
             Console.WriteLine("Se actualizo correctamente la lista");
+              }
         }
 
         public void DeletePersona(int PkPersona)
